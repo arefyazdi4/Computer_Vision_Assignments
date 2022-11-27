@@ -2,7 +2,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.datasets import mnist
 import numpy as np
-
+import keras.utils.Sequence
 
 if __name__ == '__main__':
 
