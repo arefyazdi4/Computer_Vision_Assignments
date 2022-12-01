@@ -167,3 +167,5 @@ cython_debug/
 !/.env.example
 /playground*.py
 /project4/dataset
+.jpg
+.png
