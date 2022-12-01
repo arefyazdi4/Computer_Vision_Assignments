@@ -166,6 +166,9 @@ cython_debug/
 .env
 !/.env.example
 /playground*.py
-/project4/dataset
-.jpg
-.png
+*.jpg
+*.png
+*.keras
+*.tar*
+project9_segmentation/annotations
+*.mat
