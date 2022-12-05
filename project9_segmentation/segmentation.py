@@ -23,8 +23,8 @@ def main():
          if fname.endswith(".png") and not fname.startswith(".")])
 
     #  show sample image
-    # plt.axis("off")
-    # plt.imshow(load_img(input_img_paths[9]))
+    plt.axis("off")
+    plt.imshow(load_img(input_img_paths[9]))
 
     def display_target(target_array):
         normalized_array = (target_array.astype("uint8") - 1) * 127
@@ -32,7 +32,7 @@ def main():
         plt.imshow(normalized_array[:, :, 0])
 
     img = img_to_array(load_img(target_paths[9], color_mode="grayscale"))
-    # display_target(img)
+    display_target(img)
 
     # split the arrays into a training and a validation set
     img_size = (200, 200)
@@ -87,7 +87,7 @@ def main():
 
     # get model summary
     model = get_model(img_size=img_size, num_classes=3)
-    model.summary()
+    print(model.summary())
 
     # compile and fit our mode
     model.compile(optimizer="rmsprop", loss="sparse_categorical_crossentropy")
@@ -112,24 +112,41 @@ def main():
     plt.legend()
 
 
-if __name__ == '__main__':
-    # plt.imshow(np.zeros((2, 2), dtype="uint8"))
-    main()
+def sample_model():
+    from tensorflow.keras.utils import load_img, img_to_array
+
+    # images directory
+    input_dir = "images/"
+
+    # image path
+    input_img_path = os.path.join(input_dir, 'Abyssinian_11.jpg')
+
+    #  show sample image
+    plt.axis("off")
+    plt.imshow(load_img(input_img_path))
+    plt.show()
+
+    img_size = (200, 200)
+    input_img = load_img(input_img_path, target_size=img_size)
 
     from tensorflow.keras.utils import array_to_img
     from tensorflow import keras
 
     model = keras.models.load_model("oxford_segmentation.keras")
-    i = 4
-    test_image = val_input_imgs[i]
-    plt.axis("off")
+    test_image = input_img
     plt.imshow(array_to_img(test_image))
     mask = model.predict(np.expand_dims(test_image, 0))[0]
 
     def display_mask(pred):
         mask = np.argmax(pred, axis=-1)
         mask *= 127
-        plt.axis("off")
         plt.imshow(mask)
+        plt.show()
 
     display_mask(mask)
+
+
+if __name__ == '__main__':
+    # plt.imshow(np.zeros((2, 2), dtype="uint8"))
+    # main()
+    sample_model()
