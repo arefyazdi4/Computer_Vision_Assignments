@@ -170,5 +170,5 @@ cython_debug/
 *.png
 *.keras
 *.tar*
-project9_segmentation/annotations
+project08_segmentation/annotations
 *.mat
